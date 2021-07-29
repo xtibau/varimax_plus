@@ -30,8 +30,10 @@ class VarimaxPlus:
         self.vervosity = verbosity
 
         # Empty attributes
+        self.results = None
         self.weights = None
         self.boot_data = None
+        self.var_results = None
         self.boot_results = None
         self.mask_components = None
         self.threshold_weights = None
@@ -56,6 +58,7 @@ class VarimaxPlus:
         # Perform varimax once
         varimax = Varimax(data=self.data, **varimax_dict)
         var_results = varimax()
+        self.var_results = var_results
 
         self.weights = var_results["weights"]
 
@@ -80,6 +83,10 @@ class VarimaxPlus:
         self.mask_components = mask_components
 
         self.threshold_weights = self.weights * mask_components
+
+        self.results = self.var_results
+        self.results["old_weights"] = self.results["weights"]
+        self.results["weights"] = self.threshold_weights
 
     @staticmethod
     def bootstrap(data: np.ndarray, axis: int = 0, n_repetitions: int = 100,
@@ -170,7 +177,6 @@ class VarimaxPlus:
 
     def __call__(self):
         self.varimax_plus()
-        return self
 
 
 class Varimax:
