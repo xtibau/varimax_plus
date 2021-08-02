@@ -16,7 +16,7 @@ Any contribution is more than welcome. If you want to collaborate in improving t
 ```python
 # For varimax^+
 import numpy as np
-from varimax_plus.varimax_plus import VarimaxPlus
+from varimax_plus.varimax_plus import VarimaxPlus, Varimax
 
 var_dict = {
     "truncate_by": 'max_comps',
@@ -43,6 +43,23 @@ weights = var_res["weights"]
 # Get the components
 components = data @ weights
 
+# For regular Varimax
+
+varimax_dict = {
+    "truncate_by": 'max_comps',
+    "max_comps": 15,
+    "fraction_explained_variance": 0.9,
+    "verbose": True
+}
+        
+varimax = Varimax(data, **varimax_dict)
+var_results = varimax()
+
+# Get the weights
+weights = var_res["weights"]
+
+# Get the components
+components = data @ weights
 ```
 
 # License
