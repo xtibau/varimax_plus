@@ -10,8 +10,8 @@ class VarimaxPlus:
     """
 
     def __init__(self, data, truncate_by='max_comps', max_comps=60, fraction_explained_variance=0.9,
-                 boot_axis: int = 0, boot_rep: int = 100, boot_samples: int = 100, alpha_level: float = 0.01,
-                 verbosity=True):
+                 boot_axis: int = 0, boot_rep: int = 100, boot_samples: int = 100, alpha_level: float = 0.05,
+                 verbose=True):
 
         self.data = data  # Shape L x T -> L x max_comps
 
@@ -27,7 +27,7 @@ class VarimaxPlus:
 
         # Others
         self.alpha_level = alpha_level
-        self.vervosity = verbosity
+        self.verbose = verbose
 
         # Empty attributes
         self.results = None
@@ -51,7 +51,7 @@ class VarimaxPlus:
             "truncate_by": self.truncate_by,
             "max_comps": self.max_comps,
             "fraction_explained_variance": self.fraction_explained_variance,
-            "verbosity": self.vervosity
+            "verbose": self.verbose
 
         }
 
@@ -177,6 +177,7 @@ class VarimaxPlus:
 
     def __call__(self):
         self.varimax_plus()
+        return self.results
 
 
 class Varimax:
@@ -184,19 +185,19 @@ class Varimax:
     Functions to perform a regular varimax
     """
 
-    def __init__(self, data, truncate_by='max_comps', max_comps=60, fraction_explained_variance=0.9, verbosity=True):
+    def __init__(self, data, truncate_by='max_comps', max_comps=60, fraction_explained_variance=0.9, verbose=True):
 
         self.data = data
         self.truncate_by = truncate_by
         self.max_comps = max_comps
         self.fraction_explained_variance = fraction_explained_variance
-        self.verbosity = verbosity
+        self.verbose = verbose
         self.result = None
 
     def __call__(self):
 
         self.result = self.get_varimax_loadings_standard(self.data, self.truncate_by, self.max_comps,
-                                                         self.fraction_explained_variance, self.verbosity)
+                                                         self.fraction_explained_variance, self.verbose)
         return self.result
 
     def _pca_svd(self, data, truncate_by='max_comps', max_comps=60, fraction_explained_variance=0.9, verbosity=0):
@@ -327,7 +328,7 @@ class Varimax:
         :param gamma: if = 1, equals to Varimax. if = 0 c. if = k/2 equamax. if = p*(k-1)/(p+k-2) parsimax
         :param q: number of iterations, breaks if objective archived before
         :param rtol: parameter of the machine
-        :param verbosity: verbosity
+        :param verbosity: verbose
         :return: Rotated Phi and Rotation matrix
         """
 
@@ -369,7 +370,7 @@ class Varimax:
                                                                    truncate_by=truncate_by, max_comps=max_comps,
                                                                    fraction_explained_variance=fraction_explained_variance,
                                                                    verbosity=verbosity)
-        # if verbosity > 0:
+        # if verbose > 0:
         #     print("Explained variance at max_comps = %d: %.5f" % (max_comps, explained))
 
         if verbosity:
