@@ -1,7 +1,6 @@
 # External modules
 import numpy as np
 from scipy.stats import pearsonr, ttest_1samp
-from sklearn import linear_model
 
 
 class VarimaxPlus:
