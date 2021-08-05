@@ -156,6 +156,7 @@ class VarimaxPlus:
         best_maches = []
 
         # For each row of original data
+        # TODO: Use np.corrcoef() to improve efficiency
         for o_row in range(n_org_rows):  # For each original column
             pear_coeffs = []
             for p_row in non_check_rows:  # For each permuted column
