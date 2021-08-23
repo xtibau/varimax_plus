@@ -68,6 +68,10 @@ class VarimaxPlus:
         # Perfom varimax on boostrap samples
         self.boot_results = [Varimax(d, **varimax_dict)() for d in self.boot_data]
 
+        self.threshold_hypothesis()
+
+    def threshold_hypothesis(self):
+
         # Correctly order all the weights using partial correlation
         boot_weights_sorted = [self.find_close_permutation(self.weights, s["weights"]) for s in self.boot_results]
         boot_weights_sorted = np.stack(boot_weights_sorted)
