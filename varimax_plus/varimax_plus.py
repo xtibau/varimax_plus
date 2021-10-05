@@ -36,6 +36,10 @@ class VarimaxPlus:
         self.boot_results = None
         self.mask_components = None
         self.threshold_weights = None
+        
+        # Addition for testing
+        test1 = "hello World"
+        test2 = "Hallo World also"
 
     def varimax_plus(self):
         """
