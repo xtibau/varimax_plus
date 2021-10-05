@@ -40,6 +40,7 @@ class VarimaxPlus:
         # Addition for testing
         test1 = "hello World"
         test2 = "Hallo World also"
+        test2 = "this is not working"
 
     def varimax_plus(self):
         """
