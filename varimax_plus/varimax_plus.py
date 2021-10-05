@@ -38,7 +38,7 @@ class VarimaxPlus:
         self.threshold_weights = None
         
         # Addition for testing
-        test1 = "We should merge this"
+        test1 = "We should pull and see what happens"
 
     def varimax_plus(self):
         """
