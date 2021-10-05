@@ -103,6 +103,7 @@ class VarimaxPlus:
         :return: a list of repetitions of the bootstraped original dataset
         """
 
+
         # Checks
         if data.ndim != 2:
             raise ValueError("data must be of dimension 2")
