@@ -36,7 +36,7 @@ class VarimaxPlus:
         self.boot_results = None
         self.mask_components = None
         self.threshold_weights = None
-        
+
         # Addition for testing
         test1 = "We should pull and see what happens"
 
@@ -65,8 +65,8 @@ class VarimaxPlus:
         self.weights = var_results["weights"]
 
         # Do bootstrap on time.
-        self.boot_data = self.bootstrap(self.data, axis=self.boot_axis, n_repetitions=self.boot_rep,
-                                        n_samples=self.boot_samples)
+        self.boot_data = self.butstrap(self.data, axis=self.boot_axis, n_repetitions=self.boot_rep,
+                                       n_samples=self.boot_samples)
 
         # Perfom varimax on boostrap samples
         self.boot_results = [Varimax(d, **varimax_dict)() for d in self.boot_data]
@@ -95,8 +95,8 @@ class VarimaxPlus:
         self.results["weights"] = self.threshold_weights
 
     @staticmethod
-    def bootstrap(data: np.ndarray, axis: int = 0, n_repetitions: int = 100,
-                  n_samples: int = None) -> list:
+    def butstrap(data: np.ndarray, axis: int = 0, n_repetitions: int = 100,
+                 n_samples: int = None) -> list:
         """
         Does generate n new repetitions of a given dataset bootrstaping on a given axis.
         :param data: Dataset, must be of ndim = 2
